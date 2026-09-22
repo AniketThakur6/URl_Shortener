@@ -1,6 +1,13 @@
 import urlModel from "../models/url.model.js";
 import generateCode from "./../utils/generateCode.utils.js";
 import crypto from "crypto";
+import config from "../config/config.js";
+
+const anonymousUserCookie = {
+  httpOnly: true,
+  sameSite: config.NODE_ENV === "production" ? "none" : "lax",
+  secure: config.NODE_ENV === "production",
+};
 
 export const createShortUrlController = async (req, res) => {
   const { url, alias } = req.body;
@@ -64,10 +71,7 @@ export const createShortUrlController = async (req, res) => {
     //   });
     // }
 
-    res.cookie("anonymousUserId", user.anonymousUserId, {
-      httpOnly: true,
-      sameSite: "lax",
-    });
+    res.cookie("anonymousUserId", user.anonymousUserId, anonymousUserCookie);
 
     return res.status(400).json({
       // message: "URL shortend successfully",
@@ -90,7 +94,8 @@ export const createShortUrlController = async (req, res) => {
 
   //   res.cookie("anonymousUserId", newUser.anonymousUserId, {
   //     httpOnly: true,
-  //     sameSite: "lax",
+  //     sameSite: "none",
+  //     secure:true,
   //   });
 
   //   return res.status(201).json({
@@ -131,10 +136,7 @@ export const createShortUrlController = async (req, res) => {
   });
 
   // when user not exist and give url dont have shortcode
-  res.cookie("anonymousUserId", newUrl.anonymousUserId, {
-    httpOnly: true,
-    sameSite: "lax",
-  });
+  res.cookie("anonymousUserId", newUrl.anonymousUserId, anonymousUserCookie);
 
   res.status(201).json({
     message: "URL shortend successfully",

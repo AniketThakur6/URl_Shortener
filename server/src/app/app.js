@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import urlRouter from "../routes/urlShortner.route.js";
 import { urlRedirectController } from "../controllers/url.controller.js";
 import cookieParser from "cookie-parser";

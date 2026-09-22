@@ -9,8 +9,7 @@ import {
 } from "lucide-react";
 import MyQRCode from "./MyQRCode";
 import DeleteConfirmModal from "./DeleteConfirmModal";
-import axios from "axios";
-import api from "../apis/api";
+import { shortUrl } from "../config/api";
 
 const UrlList = ({ url, openQrId, setOpenQrId, deleteApi }) => {
   const [copy, setCopy] = useState(false);
@@ -21,10 +20,7 @@ const UrlList = ({ url, openQrId, setOpenQrId, deleteApi }) => {
   const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
   const handleCopy = async () => {
-    console.log("hello");
-    await navigator.clipboard.writeText(
-      `http://localhost:3000/${url.shortCode}`,
-    );
+    await navigator.clipboard.writeText(shortUrl(url.shortCode));
 
     setCopy(true);
 
@@ -50,7 +46,7 @@ const UrlList = ({ url, openQrId, setOpenQrId, deleteApi }) => {
         </div>
         <div className="min-w-0 flex-1 flex flex-col gap-1 leading-4.5">
           <a
-            href={`http://localhost:3000/${url.shortCode}`}
+            href={shortUrl(url.shortCode)}
             target="_blank"
             className="flex lg:shrink-0 text-amber-500 w-fit font-medium hover:underline transition-all"
           >
@@ -67,7 +63,7 @@ const UrlList = ({ url, openQrId, setOpenQrId, deleteApi }) => {
           <ChartNoAxesColumn size={22} stroke="#99A1AF" /> {url.clicks} Clicks
         </span>
         <a
-          href={`http://localhost:3000/${url.shortCode}`}
+          href={shortUrl(url.shortCode)}
           target="_blank"
           className="flex w-full cursor-pointer items-center justify-center gap-1 px-2 sm:px-3 py-2 rounded bg-amber-600 hover:bg-amber-700 transition-colors duration-250 lg:whitespace-nowrap"
         >
@@ -113,7 +109,7 @@ const UrlList = ({ url, openQrId, setOpenQrId, deleteApi }) => {
       </span>
       <div className="hidden lg:flex lg:items-center lg:gap-2 lg:shrink-0">
         <a
-          href={`http://localhost:3000/${url.shortCode}`}
+          href={shortUrl(url.shortCode)}
           target="_blank"
           className="flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md bg-amber-600 px-3 py-2 text-white hover:bg-amber-700 transition-colors duration-250"
         >
@@ -152,7 +148,7 @@ const UrlList = ({ url, openQrId, setOpenQrId, deleteApi }) => {
       <div className="grid md:hidden grid-cols-5 gap-2 w-full">
         <button onClick={handleCopy} className="col-span-2 flex w-full flex-nowrap cursor-pointer items-center justify-center gap-1 whitespace-nowrap px-2 py-1.5 rounded bg-amber-600 hover:bg-amber-700 transition-colors duration-250">{copy ? <ClipboardCheck size={18} /> : <Copy size={18} />}<span>{copy ? "Copied" : "Copy"}</span></button>
         <button onClick={(event) => { event.stopPropagation(); onQrToggle(); }} aria-label="Show QR code" className="col-span-1 flex w-full cursor-pointer items-center justify-center gap-1 px-2 py-1.5 rounded bg-amber-600 hover:bg-amber-700 transition-colors duration-250"><QrCode size={18} /></button>
-        <a href={`http://localhost:3000/${url.shortCode}`} target="_blank" aria-label="Visit URL" className="col-span-1 flex items-center justify-center rounded bg-amber-600 px-2 py-1.5"><SquareArrowOutUpRight size={18} /></a>
+        <a href={shortUrl(url.shortCode)} target="_blank" aria-label="Visit URL" className="col-span-1 flex items-center justify-center rounded bg-amber-600 px-2 py-1.5"><SquareArrowOutUpRight size={18} /></a>
         <button onClick={() => setIsDeleteOpen(true)} aria-label="Delete" className="col-span-1 flex items-center justify-center rounded bg-amber-600 px-2 py-1.5"><Trash size={18} /></button>
         {isQrOpen && <div className="col-span-5 flex justify-center"><MyQRCode url={url} onClose={onQrToggle} /></div>}
       </div>
