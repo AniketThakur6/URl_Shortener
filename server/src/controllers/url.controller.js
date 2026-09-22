@@ -1,7 +1,6 @@
 import urlModel from "../models/url.model.js";
 import generateCode from "./../utils/generateCode.utils.js";
 import crypto from "crypto";
-import config from "../config/config.js";
 
 const anonymousUserCookie = {
   httpOnly: true,
