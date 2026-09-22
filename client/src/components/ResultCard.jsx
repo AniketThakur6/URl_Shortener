@@ -10,7 +10,6 @@ import {
 import MyQRCode from "./MyQRCode";
 import DeleteConfirmModal from "./DeleteConfirmModal";
 import { toast } from "react-toastify";
-import { shortUrl } from "../config/api";
 
 const ResultCard = ({ url, openQrId, setOpenQrId, deleteApi }) => {
   const [copy, setCopy] = useState(false);
@@ -21,7 +20,7 @@ const ResultCard = ({ url, openQrId, setOpenQrId, deleteApi }) => {
   const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(shortUrl(url.shortCode));
+    await navigator.clipboard.writeText(import.meta.env.VITE_API_URL/url.shortCode);
 
     setCopy(true);
 
@@ -112,7 +111,7 @@ const ResultCard = ({ url, openQrId, setOpenQrId, deleteApi }) => {
       <div className="grid md:hidden grid-cols-5 gap-2 w-full">
         <button onClick={handleCopy} className="col-span-2 flex w-full flex-nowrap cursor-pointer items-center justify-center gap-1 whitespace-nowrap px-2 py-1.5 rounded bg-amber-600 hover:bg-amber-700 transition-colors duration-250">{copy ? <ClipboardCheck size={18} /> : <Copy size={18} />}<span>{copy ? "Copied" : "Copy"}</span></button>
         <button onClick={(event) => { event.stopPropagation(); onQrToggle(); }} aria-label="Show QR code" className="col-span-1 flex w-full cursor-pointer items-center justify-center gap-1 px-2 py-1.5 rounded bg-amber-600 hover:bg-amber-700 transition-colors duration-250"><QrCode size={18} /></button>
-        <a href={shortUrl(url.shortCode)} target="_blank" aria-label="Visit URL" className="col-span-1 flex items-center justify-center rounded bg-amber-600 px-2 py-1.5"><SquareArrowOutUpRight size={18} /></a>
+        <a href={import.meta.env.VITE_API_URL/url.shortCode} target="_blank" aria-label="Visit URL" className="col-span-1 flex items-center justify-center rounded bg-amber-600 px-2 py-1.5"><SquareArrowOutUpRight size={18} /></a>
         <button onClick={() => setIsDeleteOpen(true)} aria-label="Delete" className="col-span-1 flex items-center justify-center rounded bg-amber-600 px-2 py-1.5"><Trash size={18} /></button>
         {isQrOpen && <div className="col-span-5 flex justify-center"><MyQRCode url={url} onClose={onQrToggle} /></div>}
       </div>
