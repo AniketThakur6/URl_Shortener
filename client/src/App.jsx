@@ -4,6 +4,7 @@ import ResultCard from "./components/ResultCard";
 import UrlList from "./components/UrlList";
 import api from "./apis/api";
 import { RefreshCw } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   const [urls, setUrls] = useState([]);
@@ -123,6 +124,7 @@ const App = () => {
           Aniket Thakur
         </a>
       </footer>
+      <Analytics />
     </div>
   );
 };
