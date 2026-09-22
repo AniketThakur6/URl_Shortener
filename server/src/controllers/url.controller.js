@@ -5,8 +5,8 @@ import config from "../config/config.js";
 
 const anonymousUserCookie = {
   httpOnly: true,
-  sameSite: config.NODE_ENV === "production" ? "none" : "lax",
-  secure: config.NODE_ENV === "production",
+  sameSite:  "none",
+  secure: true,
 };
 
 export const createShortUrlController = async (req, res) => {
