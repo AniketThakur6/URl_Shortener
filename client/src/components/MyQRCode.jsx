@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Download, X } from "lucide-react";
-import { shortUrl } from "../config/api";
 
 const MyQRCode = ({ url, onClose }) => {
   const [favicon, setFavicon] = useState(null);
@@ -83,7 +82,7 @@ const MyQRCode = ({ url, onClose }) => {
           <QRCodeSVG
             className="h-auto w-full max-w-60 rounded-xl border-6 border-amber-600"
             id="qr-code"
-            value={shortUrl(url.shortCode)}
+            value={import.meta.env.VITE_API_URL/url.shortCode}
             size={160}
             level="H"
             bgColor="#f3dec9"
