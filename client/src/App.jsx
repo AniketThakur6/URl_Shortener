@@ -52,7 +52,7 @@ const App = () => {
           </p>
         </div>
         <ShortenForm createUrl={createUrl} />
-        {urls.length !== 0 && (
+        {urls?.length !== 0 && (
           <p className="font-semibold select-none">Current links</p>
         )}
         {CurrentUrl ? (
@@ -67,7 +67,7 @@ const App = () => {
         <div className="flex flex-row justify-between select-none items-center">
           <p className="font-semibold select-none">
             Your links{" "}
-            <span>({urls.length - 1 === -1 ? 0 : urls.length - 1})</span>
+            <span>({urls?.length - 1 === -1 ? 0 : urls?.length - 1})</span>
           </p>
           <button
             onClick={fetchUrls}
