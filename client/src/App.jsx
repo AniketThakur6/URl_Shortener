@@ -94,7 +94,8 @@ const App = () => {
         <p>
           © 2026 URL Shortener · More info on{" "}
           <a
-            target=""
+            href="https://github.com/AniketThakur6/URl_Shortener"
+            target="_blank"
             className="text-amber-500 cursor-pointer hover:underline transition-all hover:text-amber-400"
           >
             here.

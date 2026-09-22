@@ -82,7 +82,7 @@ const MyQRCode = ({ url, onClose }) => {
           <QRCodeSVG
             className="h-auto w-full max-w-60 rounded-xl border-6 border-amber-600"
             id="qr-code"
-            value={import.meta.env.VITE_API_URL/url.shortCode}
+            value={`${import.meta.env.VITE_API_URL}/${url.shortCode}`}
             size={160}
             level="H"
             bgColor="#f3dec9"
